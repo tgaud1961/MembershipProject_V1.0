@@ -1,5 +1,5 @@
 ﻿$(function () {
     $('[data-admin-menu]').hover(function () {
-        $('[data-admin-menu]').toggle('open');
+        $('[data-admin-menu]').toggleClass('open');
     });
 });
