@@ -66,3 +66,4 @@ C:\Users\Tom Gauden\Documents\GitHub\MembershipProject_V1.0\MembershipProject_V1
 C:\Users\Tom Gauden\Documents\GitHub\MembershipProject_V1.0\MembershipProject_V1.0\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Tom Gauden\Documents\GitHub\MembershipProject_V1.0\MembershipProject_V1.0\obj\Debug\MembershipProject_V1.0.dll
 C:\Users\Tom Gauden\Documents\GitHub\MembershipProject_V1.0\MembershipProject_V1.0\obj\Debug\MembershipProject_V1.0.pdb
+C:\Users\Tom Gauden\Documents\GitHub\MembershipProject_V1.0\MembershipProject_V1.0\obj\Debug\MembershipProject_V1.0.csprojResolveAssemblyReference.cache

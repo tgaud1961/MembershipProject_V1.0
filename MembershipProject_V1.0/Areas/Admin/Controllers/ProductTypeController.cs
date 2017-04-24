@@ -7,107 +7,107 @@
     using Entities;
     using _0.Models;
 
-    public class PartsController : Controller
+    public class ProductTypeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Parts
+        // GET: Admin/ProductType
         public async Task<ActionResult> Index()
         {
-            return View(await db.Parts.ToListAsync());
+            return View(await db.ProductTypes.ToListAsync());
         }
 
-        // GET: Admin/Parts/Details/5
+        // GET: Admin/ProductType/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Part part = await db.Parts.FindAsync(id);
-            if (part == null)
+            ProductType productType = await db.ProductTypes.FindAsync(id);
+            if (productType == null)
             {
                 return HttpNotFound();
             }
-            return View(part);
+            return View(productType);
         }
 
-        // GET: Admin/Parts/Create
+        // GET: Admin/ProductType/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Parts/Create
+        // POST: Admin/ProductType/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title")] Part part)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Title")] ProductType productType)
         {
             if (ModelState.IsValid)
             {
-                db.Parts.Add(part);
+                db.ProductTypes.Add(productType);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(part);
+            return View(productType);
         }
 
-        // GET: Admin/Parts/Edit/5
+        // GET: Admin/ProductType/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Part part = await db.Parts.FindAsync(id);
-            if (part == null)
+            ProductType productType = await db.ProductTypes.FindAsync(id);
+            if (productType == null)
             {
                 return HttpNotFound();
             }
-            return View(part);
+            return View(productType);
         }
 
-        // POST: Admin/Parts/Edit/5
+        // POST: Admin/ProductType/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title")] Part part)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title")] ProductType productType)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(part).State = EntityState.Modified;
+                db.Entry(productType).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(part);
+            return View(productType);
         }
 
-        // GET: Admin/Parts/Delete/5
+        // GET: Admin/ProductType/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Part part = await db.Parts.FindAsync(id);
-            if (part == null)
+            ProductType productType = await db.ProductTypes.FindAsync(id);
+            if (productType == null)
             {
                 return HttpNotFound();
             }
-            return View(part);
+            return View(productType);
         }
 
-        // POST: Admin/Parts/Delete/5
+        // POST: Admin/ProductType/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Part part = await db.Parts.FindAsync(id);
-            db.Parts.Remove(part);
+            ProductType productType = await db.ProductTypes.FindAsync(id);
+            db.ProductTypes.Remove(productType);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

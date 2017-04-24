@@ -1,113 +1,127 @@
-﻿namespace MembershipProject_V1._0.Areas.Admin.Controllers
-{
-    using System.Data.Entity;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using Entities;
-    using _0.Models;
+﻿using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using MembershipProject_V1._0.Entities;
+using MembershipProject_V1._0.Models;
 
-    public class PartsController : Controller
+namespace MembershipProject_V1._0.Areas.Admin.Controllers
+{
+    public class ItemController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Parts
+        // GET: Admin/Item
         public async Task<ActionResult> Index()
         {
-            return View(await db.Parts.ToListAsync());
+            return View(await db.Items.ToListAsync());
         }
 
-        // GET: Admin/Parts/Details/5
+        // GET: Admin/Item/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Part part = await db.Parts.FindAsync(id);
-            if (part == null)
+            Item item = await db.Items.FindAsync(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            return View(part);
+            return View(item);
         }
 
-        // GET: Admin/Parts/Create
+        // GET: Admin/Item/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new Item
+            {
+                ItemTypes = db.ItemTypes.ToList(),
+                Parts = db.Parts.ToList(),
+                Sections = db.Sections.ToList()
+            };
+            return View(model);
         }
 
-        // POST: Admin/Parts/Create
+        // POST: Admin/Item/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title")] Part part)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description,Url,ImageUrl,HTML,WaitDays,ProductId,ItemTypeId,SectionId,PartId,IsFree")] Item item)
         {
             if (ModelState.IsValid)
             {
-                db.Parts.Add(part);
+                db.Items.Add(item);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(part);
+            return View(item);
         }
 
-        // GET: Admin/Parts/Edit/5
+        // GET: Admin/Item/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Part part = await db.Parts.FindAsync(id);
-            if (part == null)
+
+            Item item = await db.Items.FindAsync(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            return View(part);
+
+            item.ItemTypes = await db.ItemTypes.ToListAsync();
+            item.Parts = await db.Parts.ToListAsync();
+            item.Sections = await db.Sections.ToListAsync();
+
+            return View(item);
         }
 
-        // POST: Admin/Parts/Edit/5
+        // POST: Admin/Item/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title")] Part part)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,Url,ImageUrl,HTML,WaitDays,ProductId,ItemTypeId,SectionId,PartId,IsFree")] Item item)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(part).State = EntityState.Modified;
+                db.Entry(item).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(part);
+
+            return View(item);
         }
 
-        // GET: Admin/Parts/Delete/5
+        // GET: Admin/Item/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Part part = await db.Parts.FindAsync(id);
-            if (part == null)
+            Item item = await db.Items.FindAsync(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            return View(part);
+            return View(item);
         }
 
-        // POST: Admin/Parts/Delete/5
+        // POST: Admin/Item/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Part part = await db.Parts.FindAsync(id);
-            db.Parts.Remove(part);
+            Item item = await db.Items.FindAsync(id);
+            db.Items.Remove(item);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

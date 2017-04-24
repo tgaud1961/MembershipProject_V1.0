@@ -1,12 +1,12 @@
-﻿using MembershipProject_V1._0.Entities;
-using MembershipProject_V1._0.Models;
-using System.Data.Entity;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-
-namespace MembershipProject_V1._0.Areas.Admin.Controllers
+﻿namespace MembershipProject_V1._0.Areas.Admin.Controllers
 {
+    using System.Data.Entity;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Entities;
+    using _0.Models;
+
     public class SectionController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
