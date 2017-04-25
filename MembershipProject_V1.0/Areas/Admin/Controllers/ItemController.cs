@@ -8,6 +8,7 @@ using MembershipProject_V1._0.Models;
 
 namespace MembershipProject_V1._0.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ItemController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

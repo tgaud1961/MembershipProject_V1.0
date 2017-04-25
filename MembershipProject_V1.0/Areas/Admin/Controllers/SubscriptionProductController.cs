@@ -9,7 +9,7 @@ using MembershipProject_V1._0.Models;
 
 namespace MembershipProject_V1._0.Areas.Admin.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class SubscriptionProductController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

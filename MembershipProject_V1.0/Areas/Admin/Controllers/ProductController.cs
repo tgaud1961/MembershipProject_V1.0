@@ -11,6 +11,7 @@ using System.Linq;
 
 namespace MembershipProject_V1._0.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MembershipProject_V1._0.Models.UserViewModel>
+@using MembershipProject_V1._0.Areas.Admin.Models;
+@{
+    ViewBag.Title = "Users & Subscriptions";
+}
+
+<h2>@ViewBag.Title</h2>
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        @Html.Partial("_CreateButtonPartial")
+    </p>
+    <table class="table table-responsive table-striped table-condensed">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                @Html.Partial("_TableButtonsPartial", new SmallButtonModel { UserId = item.Id })
+            </tr>
+        }
+
+    </table>
+}

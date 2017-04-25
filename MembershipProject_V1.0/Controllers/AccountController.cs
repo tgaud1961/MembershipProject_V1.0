@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MembershipProject_V1._0.Models;
+using System.Collections.Generic;
+using MembershipProject_V1._0.Extensions;
+using System.Net;
 
 namespace MembershipProject_V1._0.Controllers
 {
@@ -151,7 +154,7 @@ namespace MembershipProject_V1._0.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsActive = true, Registered = DateTime.Now, EmailConfirmed = true};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -481,5 +484,119 @@ namespace MembershipProject_V1._0.Controllers
             }
         }
         #endregion
+
+        public async Task<ActionResult> Index()
+        {
+            var users = new List<UserViewModel>();
+            await users.GetUsers();
+
+            return View(users);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(UserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    IsActive = true,
+                    Registered = DateTime.Now,
+                    EmailConfirmed = true
+                };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                  
+                    return RedirectToAction("Index", "Account");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Edit(string userId)
+        {
+            if (userId == null || userId.Equals(string.Empty))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ApplicationUser user = await UserManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            var model = new UserViewModel
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Id = user.Id,
+                Password = user.PasswordHash
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(UserViewModel model)
+        {
+            try
+            {
+                if (model == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                if (ModelState.IsValid)
+                {
+                    var user = await UserManager.FindByIdAsync(model.Id);
+                    if (user != null)
+                    {
+                        user.Email = model.Email;
+                        user.UserName = model.Email;
+                        user.FirstName = model.FirstName;
+                        user.LastName = model.LastName;
+                        if (!user.PasswordHash.Equals(model.Password))
+                            user.PasswordHash = UserManager.PasswordHasher.HashPassword(model.Password);
+                        var result = await UserManager.UpdateAsync(user);
+
+                        if (result.Succeeded)
+                        {
+                            return RedirectToAction("Index");
+                        }
+
+                        AddErrors(result);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return View(model);
+        }
+
     }
 }
