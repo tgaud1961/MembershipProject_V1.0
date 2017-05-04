@@ -4,5 +4,23 @@
     "inputFiles": [
       "Content/bootstrap.css"
     ]
+  },
+  {
+    "outputFileName": "Content/thumbnails.min.css",
+    "inputFiles": [
+      "Content/thumbnails.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/navbar.min.css",
+    "inputFiles": [
+      "Content/navbar.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/Site.min.css",
+    "inputFiles": [
+      "Content/Site.css"
+    ]
   }
 ]

@@ -48,5 +48,6 @@ namespace MembershipProject_V1._0.Models
         public DbSet<ProductItem> ProductItems { get; set; }
         public DbSet<UserSubscription> UserSubscriptions { get; set; }
         public DbSet<SubscriptionProduct> SubscriptionProducts { get; set; }
+
     }
 }
