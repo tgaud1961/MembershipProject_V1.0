@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">    
     <title>@ViewBag.Title - DigiDex</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/membership")
     @Scripts.Render("~/bundles/modernizr")
-
     <meta name="description" content="The description of my page" />
+    <script href="https://content.jwplatform.com/libraries/ecX1kHVv.js"></script> 
 </head>
 <body>
     <div class="navbar navbar-fixed-top">
@@ -47,6 +47,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/admin")
+    @Scripts.Render("~/bundles/ui")
     @RenderSection("scripts", required: false)
 </body>
 </html>

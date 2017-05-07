@@ -22,5 +22,17 @@
     "inputFiles": [
       "Content/Site.css"
     ]
+  },
+  {
+    "outputFileName": "Content/carret.min.css",
+    "inputFiles": [
+      "Content/carret.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/carret.min.js",
+    "inputFiles": [
+      "Scripts/carret.js"
+    ]
   }
 ]

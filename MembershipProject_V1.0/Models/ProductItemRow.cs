@@ -21,6 +21,6 @@ namespace MembershipProject_V1._0.Models
 
         public bool IsAvailable { get; set; }
 
-        public DateTime ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
     }
 }

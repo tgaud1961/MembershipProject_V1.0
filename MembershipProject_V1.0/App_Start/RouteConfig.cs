@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace MembershipProject_V1._0
@@ -12,6 +8,12 @@ namespace MembershipProject_V1._0
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                name: "ProductContent",
+                url: "{controller}/{action}/{productId}/{itemId}",
+                defaults: new { controller = "ProductContent", action = "Index" }
+            );
 
             routes.MapRoute(
                 name: "Default",
