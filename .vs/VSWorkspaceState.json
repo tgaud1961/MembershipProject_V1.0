@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\MembershipProject_V1.0",
+    "\\MembershipProject_V1.0\\Areas",
+    "\\MembershipProject_V1.0\\Areas\\Admin",
+    "\\MembershipProject_V1.0\\Areas\\Admin\\Views",
+    "\\MembershipProject_V1.0\\Views",
+    "\\MembershipProject_V1.0\\Views\\Shared",
+    "\\packages"
+  ],
+  "SelectedNode": "\\MembershipProject_V1.0\\Views\\Shared\\_Layout.cshtml",
+  "PreviewInSolutionExplorer": false
+}
